@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8"><meta name="theme-color" content="#07110f"><meta name="description" content="SENARA Plantation Intelligence System - Integrated Field Operations and GPS Intelligence"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="id"><head><meta charset="utf-8"><meta name="theme-color" content="#07110f"><meta name="description" content="SENARA - Integrated Field Operations and GPS Intelligence"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="application-name" content="SENARA">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -7,7 +7,7 @@
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/prism-192.png">
 <link rel="apple-touch-icon" href="./icons/prism-192.png">
-<title>SENARA | Plantation Intelligence System</title>
+<title>SENARA | Integrated Field Operations & GPS Intelligence</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
@@ -64,7 +64,7 @@ input[type=range]{width:100%;accent-color:#39d98a}
 @media(max-width:850px){main{grid-template-columns:1fr;padding:10px}header{padding:13px 15px}.brand-mark{width:44px;height:44px}.brand-copy h1{font-size:22px}.header-right .system-pill{display:none}.stats{grid-template-columns:repeat(2,1fr)}#map{height:58vh;min-height:400px}.stat strong{font-size:20px}}
 @media(max-width:420px){.brand{gap:9px}.brand-mark{width:38px;height:38px}.brand-copy h1{font-size:19px;letter-spacing:3px}.brand-copy .sub{font-size:8px;letter-spacing:.8px}.pb{padding:12px}.stats{gap:7px}.stat{padding:11px}}
 
-/* PRISM dual-module navigation */
+/* SENARA navigation and identity */
 .hidden{display:none!important}
 #moduleHome{max-width:1180px;margin:28px auto;padding:18px}
 .home-kicker{color:#75d5a9;font-size:11px;letter-spacing:2px;font-weight:800}
@@ -82,6 +82,29 @@ input[type=range]{width:100%;accent-color:#39d98a}
 
 #installAppBtn[hidden]{display:none!important}
 @media(max-width:650px){#installAppBtn{font-size:10px;padding:8px 9px}}
+/* SENARA visual refresh */
+#moduleHome{max-width:1320px;margin:24px auto;padding:18px 22px 30px}
+.senara-hero{position:relative;padding:clamp(20px,4vw,38px);margin-bottom:22px;border:1px solid #315b48;border-radius:22px;overflow:hidden;background:radial-gradient(ellipse at 88% 0%,rgba(51,190,130,.18),transparent 38%),linear-gradient(125deg,rgba(18,47,35,.98),rgba(9,24,19,.98) 68%);box-shadow:0 18px 48px #0004}
+.senara-hero:after{content:"S";position:absolute;right:5%;top:-48px;font-size:260px;line-height:1;font-weight:950;color:rgba(115,238,174,.035);pointer-events:none}
+.home-kicker{position:relative;z-index:1;font-size:10px;letter-spacing:2.2px}
+.home-title{position:relative;z-index:1;font-size:clamp(27px,4.4vw,46px);line-height:1.12;max-width:760px;margin:12px 0}
+.home-desc{position:relative;z-index:1;max-width:760px;font-size:14px;margin:0 0 22px}
+.senara-expansion{position:relative;z-index:1;max-width:850px;padding:14px 16px;border:1px solid rgba(91,171,127,.35);border-radius:13px;background:rgba(4,17,12,.48)}
+.expansion-label{font-size:9px;letter-spacing:1.7px;font-weight:900;color:#83d9ac;margin-bottom:10px}
+.expansion-words{display:flex;flex-wrap:wrap;gap:8px}
+.expansion-words span{padding:6px 10px;border-radius:7px;background:#183b2b;border:1px solid #2e6348;color:#d9f6e5;font-size:12px;font-weight:750}
+.expansion-words b{color:#65e4a0;font-size:15px;margin-right:2px}
+.senara-expansion p{margin:10px 0 0;color:#9bb9a8;font-size:11px;letter-spacing:.35px}
+.home-section-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:25px}
+.home-section-head strong{display:block;font-size:17px;color:#e8fff2}.home-section-head small{display:block;color:#91aaa0;font-size:11px;margin-top:4px}
+.module-count{font-size:9px;letter-spacing:1.2px;font-weight:900;color:#9ce9bd;border:1px solid #37694f;background:#143524;padding:7px 10px;border-radius:99px;white-space:nowrap}
+.module-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.module-card{position:relative;min-height:178px;padding:20px;border-radius:15px;background:linear-gradient(145deg,#142b21,#0b1913);border-color:#2c503d}
+.module-card:before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:3px;border-radius:0 4px 4px 0;background:linear-gradient(var(--green),transparent);opacity:.7}
+.module-card h2{font-size:15px;letter-spacing:.45px}.module-card p{font-size:12px;min-height:54px}.module-icon{font-size:28px;margin-bottom:10px}.module-card.mech .module-icon{font-size:42px;margin-bottom:10px}
+.module-tag{font-size:9px;letter-spacing:.8px}
+@media(max-width:950px){.module-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){#moduleHome{padding:10px;margin:10px auto}.senara-hero{padding:20px 16px;border-radius:16px}.module-grid{grid-template-columns:1fr;gap:10px}.module-card{min-height:0;padding:17px}.module-card p{min-height:0}.home-section-head strong{font-size:15px}.senara-hero:after{font-size:180px;right:-5%;top:-20px}}
 </style></head><body>
 <header>
 <div class="brand">
@@ -94,14 +117,22 @@ input[type=range]{width:100%;accent-color:#39d98a}
  <circle cx="50" cy="20" r="4" fill="#a4ffd0"/><circle cx="28" cy="61" r="4" fill="#57d7d0"/><circle cx="72" cy="61" r="4" fill="#57d7d0"/>
  <path d="m42 47 8-14 8 14-8 14Z" fill="#43d28c" opacity=".25"/>
 </svg>
-<div class="brand-copy"><h1>SENARA</h1><div class="sub">PLANTATION INTELLIGENCE SYSTEM</div><div class="sub" style="margin-top:4px;color:#6fbea0">FERTILIZER TRACKING PLATFORM · GSYM</div></div>
+<div class="brand-copy"><h1>SENARA</h1><div class="sub">INTEGRATED FIELD OPERATIONS & GPS INTELLIGENCE</div><div class="sub" style="margin-top:4px;color:#6fbea0">FIELD OPERATIONS INTELLIGENCE · GSYM</div></div>
 </div>
 <div class="header-right"><button id="installAppBtn" class="secondary" type="button" hidden style="white-space:nowrap">＋ Instal SENARA</button><div class="system-pill"><span class="live-dot"></span>FIELD INTELLIGENCE SYSTEM</div></div>
 </header>
 <div id="moduleHome">
- <div class="home-kicker">PLANTATION INTELLIGENCE SYSTEM</div>
- <div class="home-title">Pilih Modul Monitoring</div>
- <div class="home-desc">Dua mesin analisis independen dalam satu platform. Setiap modul menggunakan polygon GITA yang sama, tetapi data GPS, playback, filter, dan perhitungan coverage tetap terpisah.</div>
+ <section class="senara-hero">
+  <div class="home-kicker">INTEGRATED FIELD OPERATIONS & GPS INTELLIGENCE</div>
+  <div class="home-title">Satu Platform. Enam Modul Operasional.</div>
+  <div class="home-desc">Monitoring aktivitas lapangan berbasis GPS, validasi polygon GITA, playback pergerakan, dan analisis coverage untuk mendukung keputusan operasional perkebunan.</div>
+  <div class="senara-expansion" aria-label="Kepanjangan SENARA">
+   <div class="expansion-label">MAKNA NAMA SENARA</div>
+   <div class="expansion-words"><span><b>S</b>mart</span><span><b>E</b>state</span><span><b>N</b>avigation</span><span><b>A</b>gronomy</span><span><b>R</b>esource</span><span><b>A</b>nalytics</span></div>
+   <p>Smart Estate Navigation & Agronomy Resource Analytics</p>
+  </div>
+  <div class="home-section-head"><div><strong>Pilih Modul Monitoring</strong><small>Setiap modul memiliki data dan analisis aktivitas masing-masing.</small></div><span class="module-count">06 MODULES</span></div>
+ </section>
  <div class="module-grid">
   <button class="module-card" id="openManual" type="button"><div class="module-icon">♟</div><h2>MANUAL TRACKING</h2><p>Pemupukan manual Aluna. Peta jalur pemupuk, playback multi-track, validasi polygon GITA, dan coverage per blok.</p><span class="module-tag">OPEN MANUAL INTELLIGENCE →</span></button>
   <button class="module-card mech" id="openMechanized" type="button"><div class="module-icon">🚜</div><h2>MECHANIZED TRACKING</h2><p>Pemupukan Kubota dan Emdek. Peta pergerakan unit, playback, filter GPS, dan coverage per blok.</p><span class="module-tag">OPEN MECHANIZED INTELLIGENCE →</span></button>
@@ -134,7 +165,7 @@ input[type=range]{width:100%;accent-color:#39d98a}
 </div>
 <div class="note">Klasifikasi awal berdasarkan pola kecepatan: ≤5 km/jam = indikasi manual. Ini indikator, bukan identitas pasti; titik GPS tetap perlu verifikasi kualitas dan kondisi lapangan.</div>
 <div class="panel ai-panel" id="manualAiPanel" style="margin-top:12px"><div class="ph">SENARA AI · MANUAL FERTILIZER WORKTIME AUDIT</div><div class="pb"><div class="ai-head"><div><b>AI Insight Pemupukan Manual</b><div class="note">Evaluasi durasi kerja, jeda GPS, istirahat, dan titik di luar polygon. Hasil merupakan indikator untuk verifikasi mandor.</div></div><button id="manualRunAI" disabled>Analisis Ulang</button></div><div id="manualAiSummary" class="ai-summary">Upload ZIP pemupukan manual untuk menjalankan analisis.</div><div id="manualAiFindings" class="ai-findings"></div></div></div>
-<div class="playback" style="margin-top:12px"><div class="playback-title">OFFLINE MAP MANAGER · MANUAL</div><div class="btnrow"><button id="manualOfflinePack" class="secondary" disabled>Unduh Paket Peta</button><button id="manualOfflinePng" class="secondary" disabled>Unduh PNG</button></div><div class="btnrow"><button id="manualOfflineLoad" class="secondary">Buka Paket Offline</button><button id="manualOfflineClear" class="secondary">Tutup Peta Offline</button></div><input id="manualOfflineFile" type="file" accept=".json,application/json" hidden><div id="manualOfflineStatus" class="note">Paket menyimpan polygon GITA dan jalur GPS sebagai file JSON. Tidak memakai localStorage.</div></div>
+<div class="playback" style="margin-top:12px"><div class="playback-title">OFFLINE MAP MANAGER · MANUAL</div><div class="btnrow"><button id="manualOfflinePack" class="secondary" disabled>Unduh Paket Peta</button><button id="manualOfflinePng" class="secondary" disabled>Unduh PNG</button></div><div class="btnrow"><button id="manualOfflineLoad" class="secondary">Buka Paket Offline</button><button id="manualOfflineClear" class="secondary">Tutup Peta Offline</button></div><div class="btnrow"><button id="manualHtmlReport" class="secondary" disabled>Unduh Laporan HTML Interaktif</button></div><input id="manualOfflineFile" type="file" accept=".json,application/json" hidden><div id="manualOfflineStatus" class="note">Paket menyimpan polygon GITA dan jalur GPS sebagai file JSON. Tidak memakai localStorage.</div></div>
 <div class="stats" style="grid-template-columns:repeat(2,1fr);margin-top:10px">
  <div class="stat"><small>Titik dalam polygon GITA</small><strong id="manualInside">0</strong></div>
  <div class="stat"><small>Titik di luar polygon</small><strong id="manualOutside">0</strong></div>
@@ -162,7 +193,7 @@ input[type=range]{width:100%;accent-color:#39d98a}
 <section class="panel"><div class="ph" id="activityHeading">SENARA · ACTIVITY TRACKING · GITA POLYGON</div><div class="pb">
 <div class="upload"><b id="activityUploadTitle">Upload ZIP GPS Aktivitas</b><p class="sub">Upload satu atau beberapa ZIP berisi CSV GPS pekerja (format sama seperti Pupuk Manual)</p><input id="activityFiles" type="file" accept=".zip,application/zip" multiple></div>
 <div class="note" id="activityFilterNote">Filter wajib: kecepatan &lt; 5 km/jam, akurasi GPS ≤ 5 meter, satelit ≥ 4. Data yang tidak memiliki parameter GPS ditandai tidak lengkap dan tidak dihitung coverage.</div>
-<div class="btnrow"><button id="activityProcessBtn" disabled>Proses File Aktivitas</button><button id="activityClearBtn" class="secondary">Bersihkan Modul</button><button id="activityExportBtn" class="secondary" disabled>Unduh CSV Hasil</button></div>
+<div class="btnrow"><button id="activityProcessBtn" disabled>Proses File Aktivitas</button><button id="activityClearBtn" class="secondary">Bersihkan Modul</button><button id="activityExportBtn" class="secondary" disabled>Unduh CSV Hasil</button><button id="activityHtmlReportBtn" class="secondary" disabled>Unduh Laporan HTML</button></div>
 <div id="activityStatus" class="status">Menunggu file ZIP aktivitas.</div>
 <div class="panel ai-panel" id="activityAiPanel" style="margin-top:12px"><div class="ph">SENARA AI · ACTIVITY WORKTIME AUDIT</div><div class="pb"><div class="ai-head"><div><b id="activityAiTitle">AI Insight Aktivitas</b><div class="note">Standar semua pekerjaan: 7 jam kerja; istirahat terjadwal 11.30–12.30. Temuan di bawah 7 jam menjadi pertanyaan untuk pemeriksaan mandor.</div></div><button id="activityRunAI" disabled>Analisis Ulang</button></div><div id="activityAiSummary" class="ai-summary">Upload ZIP aktivitas untuk menjalankan analisis.</div><div id="activityAiFindings" class="ai-findings"></div></div></div>
 <div class="playback" id="activityPlaybackPanel" style="margin-top:12px">
@@ -197,7 +228,7 @@ input[type=range]{width:100%;accent-color:#39d98a}
 </div>
 <div class="panel"><div class="ph">PETA JALUR TRACKING & POLYGON BLOK</div><div class="pb" style="padding:10px">
 <div id="map"></div>
-<div class="playback" style="margin-top:10px"><div class="playback-title">OFFLINE MAP MANAGER · MEKANIS</div><div class="btnrow"><button id="mechOfflinePack" class="secondary" disabled>Unduh Paket Peta</button><button id="mechOfflinePng" class="secondary" disabled>Unduh PNG</button></div><div class="btnrow"><button id="mechOfflineLoad" class="secondary">Buka Paket Offline</button><button id="mechOfflineClear" class="secondary">Tutup Peta Offline</button></div><input id="mechOfflineFile" type="file" accept=".json,application/json" hidden><div id="mechOfflineStatus" class="note">Paket peta mekanis terpisah dari data manual. File dapat disimpan dan dibuka kembali tanpa localStorage.</div></div>
+<div class="playback" style="margin-top:10px"><div class="playback-title">OFFLINE MAP MANAGER · MEKANIS</div><div class="btnrow"><button id="mechOfflinePack" class="secondary" disabled>Unduh Paket Peta</button><button id="mechOfflinePng" class="secondary" disabled>Unduh PNG</button></div><div class="btnrow"><button id="mechOfflineLoad" class="secondary">Buka Paket Offline</button><button id="mechOfflineClear" class="secondary">Tutup Peta Offline</button></div><div class="btnrow"><button id="mechHtmlReport" class="secondary" disabled>Unduh Laporan HTML Interaktif</button></div><input id="mechOfflineFile" type="file" accept=".json,application/json" hidden><div id="mechOfflineStatus" class="note">Paket peta mekanis terpisah dari data manual. File dapat disimpan dan dibuka kembali tanpa localStorage.</div></div>
 <div class="playback" id="playbackPanel">
  <div class="playback-top"><div class="playback-title">PLAYBACK PERGERAKAN KUBOTA · BERDASARKAN WAKTU CSV</div><div class="playback-controls">
   <button id="playBtn" disabled>▶ Play</button><button id="pauseBtn" class="secondary" disabled>Ⅱ Pause</button><button id="restartBtn" class="secondary" disabled>↺ Awal</button>
@@ -243,6 +274,61 @@ function currentOfflinePayload(mode){
  return base;
 }
 function downloadBlob(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);}
+function senaraSafeJson(value){return JSON.stringify(value).replace(/</g,'\\u003c').replace(/>/g,'\\u003e').replace(/&/g,'\\u0026');}
+function senaraReadTable(id){const el=$(id);return el?Array.from(el.querySelectorAll('tr')).map(tr=>Array.from(tr.children).map(td=>td.innerText.trim())).filter(r=>r.length):[];}
+function senaraExportHtmlReport(mode){
+ let moduleName='',tracks=[],points=[],summary={},table=[],ai='';
+ if(mode==='manual'){
+  moduleName='PEMUPUKAN MANUAL';
+  tracks=manualTracks.map(t=>({name:t.name,points:t.points.map(p=>({lat:p.lat,lon:p.lon,ts:p.ts,time:p.time,speed:p.speed,accuracy:p.accuracy,sat:p.sat,inside:manualPointBlock(p)!==null,block:manualPointBlock(p)}))}));
+  points=tracks.flatMap(t=>t.points.map(p=>({...p,worker:t.name,file:t.name})));
+  summary={workers:manualTracks.length,total:points.length,valid:points.length,inside:points.filter(p=>p.inside).length,outside:points.filter(p=>!p.inside).length,coverageHa:$('manualCoverage').textContent,completion:'-',blocks:$('manualBlocks').textContent};
+  table=senaraReadTable('manualBlockRows');ai=($('manualAiSummary')?.innerText||'')+'\\n'+($('manualAiFindings')?.innerText||'');
+ }else if(mode==='mechanized'){
+  moduleName='MECHANIZED TRACKING · KUBOTA / EMDEK';
+  tracks=[{name:'Kubota / Emdek',points:filtered.map(p=>({lat:p.lat,lon:p.lon,ts:p.ts,time:p.time,speed:p.speed,accuracy:p.accuracy,sat:p.sat,inside:p.inside,block:p.block}))}];
+  points=tracks[0].points;
+  summary={total:raw.length,valid:filtered.length,inside:filtered.filter(p=>p.inside).length,outside:filtered.filter(p=>!p.inside).length,coverageHa:$('totalCoverage').textContent,completion:$('totalCompletion').textContent,blocks:senaraReadTable('blockRows').length-1};
+  table=senaraReadTable('blockRows');ai=($('aiSummary')?.innerText||'')+'\\n'+($('aiFindings')?.innerText||'')+'\\n'+($('aiWorktimeSummary')?.innerText||'')+'\\n'+($('aiWorktimeFindings')?.innerText||'');
+ }else{
+  moduleName=activityNames[activityCurrent]||activityCurrent.toUpperCase();
+  points=activityRows.map(p=>({lat:p.lat,lon:p.lon,ts:p.ts,time:p.time,speed:p.speed,accuracy:p.accuracy,sat:p.sat,inside:!!p.block,block:p.block,valid:p.valid,worker:p.employee||p.file,file:p.file}));
+  tracks=[{name:moduleName,points}];
+  summary={total:points.length,valid:points.filter(p=>p.valid).length,inside:points.filter(p=>p.valid&&p.inside).length,outside:points.filter(p=>p.valid&&!p.inside).length,coverageHa:$('activityCoverageHa').textContent,completion:$('activityCompletion').textContent,blocks:$('activityBlocks').textContent,files:$('activityFileCount').textContent};
+  table=senaraReadTable('activityBlockRows');ai=($('activityAiSummary')?.innerText||'')+'\\n'+($('activityAiFindings')?.innerText||'');
+ }
+ points=points.filter(p=>Number.isFinite(Number(p.lat))&&Number.isFinite(Number(p.lon)));
+ if(!points.length){alert('Belum ada data GPS untuk dibuatkan laporan HTML.');return;}
+ const payload={brand:'SENARA',title:moduleName,createdAt:new Date().toISOString(),summary,table,ai,points,tracks,polygons:GITA_POLYGONS};
+ const json=senaraSafeJson(payload);
+ const html=`<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SENARA Offline Report - ${moduleName}</title><style>
+ :root{color-scheme:dark;--bg:#07110f;--panel:#10221b;--line:#2b4b3c;--txt:#e8f5ed;--muted:#9ab5a6;--green:#39d98a;--cyan:#54d6df}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0,#163d2d,#07110f 55%);color:var(--txt);font:14px system-ui,Arial,sans-serif;padding:18px}.wrap{max-width:1200px;margin:auto}header,.card{background:#10221bee;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}h1{margin:0;color:#b8f5d0;letter-spacing:3px}h2{font-size:14px;color:#b8f5d0;letter-spacing:1px}.muted,small{color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:9px}.stat{background:#0a1913;border:1px solid var(--line);padding:12px;border-radius:10px}.stat b{display:block;font-size:22px;color:#fff;margin-top:5px}#map{width:100%;height:min(68vh,680px);background:#0a1712;border:1px solid var(--line);border-radius:10px;touch-action:none;cursor:grab}.offline-map-tools{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:8px 0}.offline-map-tools button{min-width:40px}.offline-map-tools .muted{font-size:11px}button,select{background:#176d48;color:white;border:1px solid #42bd80;padding:9px 12px;border-radius:8px;font-weight:700}button.secondary{background:#172c22;border-color:#45624f}input[type=range]{width:100%;accent-color:var(--green)}.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}.controls select{background:#0b1913}table{border-collapse:collapse;width:100%;font-size:12px}td,th{padding:9px;border-bottom:1px solid #294236;text-align:left}th{color:#aee9c4}pre{white-space:pre-wrap;word-break:break-word;color:#d5e9dc;font:12px/1.6 system-ui} .legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:9px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}@media(max-width:600px){body{padding:9px}header,.card{padding:12px}#map{height:55vh}}
+ </style></head><body><div class="wrap"><header><h1>SENARA</h1><b>INTEGRATED FIELD OPERATIONS & GPS INTELLIGENCE</b><p>${moduleName} · LAPORAN OFFLINE INTERAKTIF</p><small>Dibuat: ${new Date().toLocaleString('id-ID')} · Data tersimpan di dalam file ini</small></header>
+ <section class="card"><h2>RINGKASAN HASIL</h2><div class="stats" id="stats"></div></section>
+ <section class="card"><h2>PETA POLYGON GITA & JALUR GPS</h2><div class="offline-map-tools"><button type="button" id="mapZoomIn" aria-label="Perbesar peta">＋</button><button type="button" id="mapZoomOut" aria-label="Perkecil peta">−</button><button type="button" id="mapZoomReset" class="secondary">Reset zoom</button><span class="muted">Scroll / pinch untuk zoom · Geser untuk pan</span></div><svg id="map" viewBox="0 0 1000 650" role="img" aria-label="Peta offline polygon dan jalur GPS"></svg><div class="legend"><span><i class="dot" style="background:#eab308"></i>Polygon GITA</span><span><i class="dot" style="background:#39d98a"></i>GPS di dalam polygon</span><span><i class="dot" style="background:#ef4444"></i>GPS di luar polygon</span><span><i class="dot" style="background:#54d6df"></i>Jalur playback</span></div>
+ <div class="controls"><button id="play">▶ Play</button><button class="secondary" id="pause">Ⅱ Pause</button><button class="secondary" id="restart">↺ Awal</button><label>Kecepatan <select id="rate"><option value="1">1×</option><option value="2" selected>2×</option><option value="4">4×</option><option value="8">8×</option><option value="10">10×</option></select></label></div><input id="range" type="range" min="0" max="0" value="0"><div class="muted" id="playinfo">Playback belum dimulai</div></section>
+ <section class="card"><h2>REKAP COVERAGE PER BLOK</h2><div style="overflow:auto"><table id="blockTable"></table></div></section><section class="card"><h2>SENARA AI INSIGHT</h2><pre id="ai"></pre></section><footer class="muted">SENARA · One Platform. All Field Operations. · File ini dapat dibuka tanpa koneksi internet. Basemap satelit tidak disertakan; peta menggunakan polygon dan jalur vektor.</footer></div>
+ <script>const D=${json};const $=id=>document.getElementById(id);const fmt=v=>v===undefined||v===null||v===''?'-':v;const statItems=[['Total GPS',D.summary.total??D.summary.points],['GPS valid',D.summary.valid],['Dalam polygon',D.summary.inside],['Di luar polygon',D.summary.outside],['Coverage (Ha)',D.summary.coverageHa],['Ketuntasan',D.summary.completion],['Blok',D.summary.blocks],['Pekerja / file',D.summary.workers??D.summary.files]];$('stats').innerHTML=statItems.map(([k,v])=>v===undefined?'' : '<div class="stat"><small>'+k+'</small><b>'+fmt(v)+'</b></div>').join('');$('ai').textContent=D.ai||'Tidak ada ringkasan AI Insight pada saat ekspor.';const rows=D.table||[];$('blockTable').innerHTML=rows.map((r,i)=>'<tr>'+r.map(c=>i===0?'<th>'+c+'</th>':'<td>'+c+'</td>').join('')+'</tr>').join('')||'<tr><td>Rekap blok tidak tersedia.</td></tr>';
+ const pts=D.points.filter(p=>Number.isFinite(+p.lat)&&Number.isFinite(+p.lon));const coords=[];function scan(c){if(!Array.isArray(c))return;if(typeof c[0]==='number'&&typeof c[1]==='number'){coords.push(c);return}c.forEach(scan)}D.polygons.features.forEach(f=>scan(f.geometry.coordinates));pts.forEach(p=>coords.push([+p.lon,+p.lat]));let minX=Math.min(...coords.map(c=>c[0])),maxX=Math.max(...coords.map(c=>c[0])),minY=Math.min(...coords.map(c=>c[1])),maxY=Math.max(...coords.map(c=>c[1]));if(maxX===minX)maxX+=.001;if(maxY===minY)maxY+=.001;const project=(lon,lat)=>[30+(lon-minX)/(maxX-minX)*940,620-(lat-minY)/(maxY-minY)*590];const svg=$('map'),ns='http://www.w3.org/2000/svg';
+ let mapView={x:0,y:0,w:1000,h:650},dragState=null,pointers=new Map(),pinchStart=null;
+ const applyMapView=()=>svg.setAttribute('viewBox',mapView.x+' '+mapView.y+' '+mapView.w+' '+mapView.h);
+ const zoomMap=(factor,cx=mapView.x+mapView.w/2,cy=mapView.y+mapView.h/2)=>{
+  const nw=Math.max(90,Math.min(1000,mapView.w*factor)),nh=nw*650/1000;
+  const rx=(cx-mapView.x)/mapView.w,ry=(cy-mapView.y)/mapView.h;
+  mapView={x:cx-rx*nw,y:cy-ry*nh,w:nw,h:nh};applyMapView();
+ };
+ const pointOnSvg=e=>{const r=svg.getBoundingClientRect();return{x:mapView.x+(e.clientX-r.left)/r.width*mapView.w,y:mapView.y+(e.clientY-r.top)/r.height*mapView.h};};
+ $('mapZoomIn').onclick=()=>zoomMap(.75);
+ $('mapZoomOut').onclick=()=>zoomMap(1.33);
+ $('mapZoomReset').onclick=()=>{mapView={x:0,y:0,w:1000,h:650};applyMapView();};
+ svg.addEventListener('wheel',e=>{e.preventDefault();const p=pointOnSvg(e);zoomMap(e.deltaY<0?.82:1.22,p.x,p.y);},{passive:false});
+ svg.addEventListener('pointerdown',e=>{svg.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===1){dragState={x:e.clientX,y:e.clientY,view:{...mapView}};svg.style.cursor='grabbing';}else if(pointers.size===2){const a=[...pointers.values()];pinchStart={distance:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),view:{...mapView}};dragState=null;}});
+ svg.addEventListener('pointermove',e=>{if(!pointers.has(e.pointerId))return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2&&pinchStart){const a=[...pointers.values()],dist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),factor=pinchStart.distance/Math.max(1,dist),centerX=(a[0].x+a[1].x)/2,centerY=(a[0].y+a[1].y)/2,r=svg.getBoundingClientRect(),cx=mapView.x+(centerX-r.left)/r.width*mapView.w,cy=mapView.y+(centerY-r.top)/r.height*mapView.h;zoomMap(factor,cx,cy);pinchStart.distance=dist;pinchStart.view={...mapView};}else if(dragState&&pointers.size===1){const r=svg.getBoundingClientRect(),dx=(e.clientX-dragState.x)/r.width*dragState.view.w,dy=(e.clientY-dragState.y)/r.height*dragState.view.h;mapView={...dragState.view,x:dragState.view.x-dx,y:dragState.view.y-dy};applyMapView();}});
+ const endPointer=e=>{pointers.delete(e.pointerId);if(pointers.size<2)pinchStart=null;if(!pointers.size){dragState=null;svg.style.cursor='grab';}else if(pointers.size===1){const p=[...pointers.values()][0];dragState={x:p.x,y:p.y,view:{...mapView}};}};
+ svg.addEventListener('pointerup',endPointer);svg.addEventListener('pointercancel',endPointer);
+ function el(tag,attrs,parent=svg){const n=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));parent.appendChild(n);return n;}function pathForRing(r){return r.map((c,i)=>{const q=project(c[0],c[1]);return(i?'L':'M')+q[0].toFixed(1)+','+q[1].toFixed(1)}).join(' ')+' Z';}D.polygons.features.forEach(f=>{const g=f.geometry;if(!g)return;const polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;polys.forEach(poly=>{if(poly[0])el('path',{d:poly.map(pathForRing).join(' '),fill:'#eab30818',stroke:'#eab308', 'stroke-width':'1.1','fill-rule':'evenodd'});});});const track=el('polyline',{fill:'none',stroke:'#54d6df','stroke-width':'2.5','stroke-linecap':'round','stroke-linejoin':'round',opacity:'.85'});const marker=el('circle',{r:'7',fill:'#54d6df',stroke:'#fff','stroke-width':'2',cx:'0',cy:'0',visibility:'hidden'});const dots=el('g',{});pts.forEach(p=>{const q=project(+p.lon,+p.lat);el('circle',{cx:q[0],cy:q[1],r:'2.2',fill:p.inside?'#39d98a':(p.valid===false?'#64748b':'#ef4444'),opacity:'.8'},dots)});let events=pts.filter(p=>Number.isFinite(+p.ts)).sort((a,b)=>a.ts-b.ts);if(!events.length)events=pts.slice();$('range').max=Math.max(0,events.length-1);let idx=0,timer=null;function setIndex(i){if(!events.length)return;idx=Math.max(0,Math.min(events.length-1,i));const p=events[idx],q=project(+p.lon,+p.lat),trail=events.slice(0,idx+1).map(x=>project(+x.lon,+x.lat));track.setAttribute('points',trail.map(x=>x.join(',')).join(' '));marker.setAttribute('cx',q[0]);marker.setAttribute('cy',q[1]);marker.setAttribute('visibility','visible');$('range').value=idx;$('playinfo').textContent=(p.time||new Date(+p.ts).toLocaleString('id-ID'))+' · '+(p.worker||p.employee||p.file||'GPS')+' · '+(idx+1)+' / '+events.length;}function stop(){if(timer){clearInterval(timer);timer=null;}}$('play').onclick=()=>{if(!events.length)return;if(idx>=events.length-1)setIndex(0);stop();timer=setInterval(()=>{if(idx>=events.length-1){stop();return}setIndex(idx+1)},Math.max(100,500/(+$('rate').value||1)));};$('pause').onclick=stop;$('restart').onclick=()=>{stop();setIndex(0)};$('range').oninput=e=>{stop();setIndex(+e.target.value)};if(events.length)setIndex(0);else $('playinfo').textContent='Timestamp tidak tersedia; jalur GPS tetap ditampilkan.';<\/script></body></html>`;
+ const safe=moduleName.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');downloadBlob(new Blob([html],{type:'text/html;charset=utf-8'}),`SENARA_${safe}_REPORT_${new Date().toISOString().slice(0,10)}.html`);
+}
 function exportOfflinePackage(mode){
  const payload=currentOfflinePayload(mode),count=payload.tracks.reduce((n,t)=>n+t.points.length,0);
  if(!count){alert('Belum ada data GPS untuk dimasukkan ke paket offline.');return;}
@@ -275,7 +361,7 @@ function loadOfflinePackage(file,mode){
 function bindOfflineControls(mode){const prefix=mode==='manual'?'manual':'mech';$(prefix+'OfflinePack').addEventListener('click',()=>exportOfflinePackage(mode));$(prefix+'OfflinePng').addEventListener('click',()=>exportOfflinePng(mode));$(prefix+'OfflineLoad').addEventListener('click',()=>$(prefix+'OfflineFile').click());$(prefix+'OfflineFile').addEventListener('change',e=>{if(e.target.files[0])loadOfflinePackage(e.target.files[0],mode);e.target.value='';});$(prefix+'OfflineClear').addEventListener('click',()=>{offlineLayer.clearLayers();if(map.hasLayer(offlineLayer))map.removeLayer(offlineLayer);$(prefix+'OfflineStatus').textContent='Layer paket offline ditutup.';});}
 
 function initMap(){
- map=L.map('map').setView([-2.26,111.84],14);
+ map=L.map('map',{zoomControl:true,scrollWheelZoom:true,doubleClickZoom:true,dragging:true,touchZoom:true,boxZoom:true,keyboard:true}).setView([-2.26,111.84],14);
  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Tiles © Esri'}).addTo(map);
  polyLayer=L.geoJSON(GITA_POLYGONS,{style:{color:'#facc15',weight:2.4,fillColor:'#16a34a',fillOpacity:.16},onEachFeature:(f,l)=>{const b=blockName(f),ha=hestiHa(f);l.bindTooltip(`${b} | Hesti Revisi: ${ha===null?'-':ha.toFixed(2)+' Ha'}`);l.bindPopup(`<b>${b}</b><br>HA Tanam Revisi 2026 (Excel kolom H): <b>${ha===null?'-':ha.toFixed(2)+' Ha'}</b><br><small>Sumber: HESTI 2026 VS REVISI 2026 VS SUSTAIN.xlsx</small>`);}}).addTo(map);
  trackLayer=L.layerGroup().addTo(map);pointsLayer=L.layerGroup().addTo(map);manualLayer=L.layerGroup().addTo(map);offlineLayer=L.layerGroup().addTo(map);activityLayer=L.layerGroup();
@@ -427,7 +513,7 @@ function applyFilters(){
  $('blockRows').innerHTML=rows.map(([k,v])=>`<tr><td>${k}</td><td>${fmt(v.points)}</td><td>${v.coverage.toFixed(2)}</td><td>${v.hesti===null?'-':v.hesti.toFixed(2)}</td><td>${v.completion===null?'-':v.completion.toFixed(1)+'%'}</td></tr>`).join('')||'<tr><td colspan="5">Tidak ada titik di dalam polygon</td></tr>';
  const totalCov=rows.reduce((a,[,v])=>a+v.coverage,0), totalHesti=rows.reduce((a,[,v])=>a+(v.hesti||0),0);
  $('totalCoverage').textContent=totalCov.toFixed(2);$('totalCompletion').textContent=(totalHesti?totalCov/totalHesti*100:0).toFixed(1)+'%';
- $('exportBtn').disabled=!filtered.length;$('mechOfflinePack').disabled=!filtered.length;$('mechOfflinePng').disabled=!filtered.length;
+ $('exportBtn').disabled=!filtered.length;$('mechHtmlReport').disabled=!filtered.length;$('mechOfflinePack').disabled=!filtered.length;$('mechOfflinePng').disabled=!filtered.length;
  $('status').textContent=`Titik valid: ${fmt(raw.length)}\nLolos filter: ${fmt(filtered.length)}\nDikeluarkan: ${fmt(raw.length-filtered.length)}\nBlok terdeteksi: ${detectedBlocks.size}\nBlok memenuhi ambang (≥${MIN_POINTS_PER_BLOCK} titik di dalam polygon): ${rows.length}\nCoverage hasil buffer jalur: ${totalCov.toFixed(2)} Ha\nKetuntasan terhadap HESTI: ${(totalHesti?totalCov/totalHesti*100:0).toFixed(1)}%\nFilter: ≤${max} km/jam; akurasi ≤${acc} m; satelit ≥${sat||'tidak dibatasi'}.\nMetode: hanya titik berurutan di dalam polygon blok yang membentuk coverage; titik luar polygon memutus jalur dan hanya untuk playback/audit. Buffer radius ${GITA_BUFFER_M} m, union per blok, lalu clip ke polygon blok.`;;
  $('runAI').disabled=!filtered.length;runAIAnalysis();
 }
@@ -528,7 +614,7 @@ async function processManualZip(){
   manualTracks=results.filter(x=>x.ok);
   manualEvents=manualTracks.flatMap(t=>t.points).filter(p=>p.ts!==null).sort((a,b)=>a.ts-b.ts);
   manualEvents.forEach((p,i)=>p.eventIndex=i);
-  $('manualWorkers').textContent=fmt(manualTracks.length);$('manualPoints').textContent=fmt(manualTracks.reduce((s,t)=>s+t.points.length,0));$('manualOfflinePack').disabled=false;$('manualOfflinePng').disabled=false;
+  $('manualWorkers').textContent=fmt(manualTracks.length);$('manualPoints').textContent=fmt(manualTracks.reduce((s,t)=>s+t.points.length,0));$('manualHtmlReport').disabled=false;$('manualOfflinePack').disabled=false;$('manualOfflinePng').disabled=false;
   $('manualRange').max=Math.max(0,manualEvents.length-1);$('manualRange').value=0;
   ['manualPlay','manualPause','manualRestart'].forEach(id=>$(id).disabled=!manualEvents.length);$('manualRange').disabled=!manualEvents.length;
   const failed=results.filter(x=>!x.ok);
@@ -670,7 +756,7 @@ function manualStop(){if(manualTimer){clearInterval(manualTimer);manualTimer=nul
 function manualStart(){if(!manualEvents.length)return;if(manualIndex>=manualEvents.length-1)manualSetIndex(0);manualStop();const rate=Number($('manualRate').value)||1;manualTimer=setInterval(()=>{if(manualIndex>=manualEvents.length-1){manualStop();return;}manualSetIndex(manualIndex+1);},Math.max(60,500/rate));}
 function clearManual(){
  manualStop();manualTracks=[];manualEvents=[];Object.values(manualMarkers).forEach(m=>manualLayer.removeLayer(m));manualMarkers={};Object.values(manualTrails).forEach(x=>manualLayer.removeLayer(x));manualTrails={};if(manualPointLayer){manualLayer.removeLayer(manualPointLayer);manualPointLayer=null;}
- $('manualWorkers').textContent='0';$('manualPoints').textContent='0';$('manualOfflinePack').disabled=true;$('manualOfflinePng').disabled=true;$('manualInside').textContent='0';$('manualOutside').textContent='0';$('manualBlocks').textContent='0';$('manualCoverage').textContent='0.00';$('manualBlockRows').innerHTML='<tr><td colspan="5">Menunggu ZIP manual</td></tr>';$('manualStatus').textContent='Data manual dibersihkan.';$('manualTime').textContent='Belum ada rekaman';$('manualPosition').textContent='0 / 0 titik';$('manualClassification').textContent='Klasifikasi: menunggu data';$('manualRange').value=0;$('manualRange').max=0;$('manualRange').disabled=true;['manualPlay','manualPause','manualRestart'].forEach(id=>$(id).disabled=true);$('manualZip').value='';$('manualRunAI').disabled=true;$('manualAiSummary').textContent='Data manual dibersihkan.';$('manualAiFindings').innerHTML='';
+ $('manualWorkers').textContent='0';$('manualPoints').textContent='0';$('manualHtmlReport').disabled=true;$('manualOfflinePack').disabled=true;$('manualOfflinePng').disabled=true;$('manualInside').textContent='0';$('manualOutside').textContent='0';$('manualBlocks').textContent='0';$('manualCoverage').textContent='0.00';$('manualBlockRows').innerHTML='<tr><td colspan="5">Menunggu ZIP manual</td></tr>';$('manualStatus').textContent='Data manual dibersihkan.';$('manualTime').textContent='Belum ada rekaman';$('manualPosition').textContent='0 / 0 titik';$('manualClassification').textContent='Klasifikasi: menunggu data';$('manualRange').value=0;$('manualRange').max=0;$('manualRange').disabled=true;['manualPlay','manualPause','manualRestart'].forEach(id=>$(id).disabled=true);$('manualZip').value='';$('manualRunAI').disabled=true;$('manualAiSummary').textContent='Data manual dibersihkan.';$('manualAiFindings').innerHTML='';
 }
 
 // Independent activity-module data engine: pruning, dongkel, circle manual, chemist.
@@ -827,10 +913,10 @@ function activityRender(fileCount,bad){activityStore[activityCurrent]=activityRo
  const totalCoverage=rows.reduce((sum,[b,v])=>sum+v.coverage,0),totalHesti=rows.reduce((sum,[b,v])=>sum+(v.hesti||0),0),completion=totalHesti?totalCoverage/totalHesti*100:0;
  $('activityFileCount').textContent=fileCount-bad.length;$('activityTotal').textContent=fmt(activityRows.length);$('activityValid').textContent=fmt(valid.length);$('activityInside').textContent=fmt(inside.length);$('activityOutside').textContent=fmt(outside);$('activityBlocks').textContent=rows.length;$('activityCoverageHa').textContent=totalCoverage.toFixed(2);$('activityCompletion').textContent=completion.toFixed(1)+'%';
  $('activityBlockRows').innerHTML=rows.map(([b,v])=>`<tr><td>${b}</td><td>${fmt(v.points)}</td><td>${v.coverage.toFixed(2)}</td><td>${v.hesti===null?'-':v.hesti.toFixed(2)}</td><td>${v.hesti===null?'-':(v.coverage/v.hesti*100).toFixed(1)+'%'}</td></tr>`).join('')||'<tr><td colspan="5">Tidak ada titik GPS valid di dalam polygon</td></tr>';
- $('activityStatus').textContent=`${activityNames[activityCurrent]}: ${fmt(activityRows.length)} titik dari ${fileCount-bad.length} file. ${fmt(valid.length)} lolos filter; ${fmt(inside.length)} titik valid di dalam polygon. Coverage ${totalCoverage.toFixed(2)} Ha; ketuntasan ${completion.toFixed(1)}% dari HESTI.${bad.length?' File gagal: '+bad.join('; '):''}`;$('activityExportBtn').disabled=!activityRows.length;$('activityRunAI').disabled=!activityRows.length;$('activityAiTitle').textContent='AI Insight '+activityNames[activityCurrent];prismRenderAi('activityAi',activityRows.filter(p=>p.valid),activityNames[activityCurrent]);
+ $('activityStatus').textContent=`${activityNames[activityCurrent]}: ${fmt(activityRows.length)} titik dari ${fileCount-bad.length} file. ${fmt(valid.length)} lolos filter; ${fmt(inside.length)} titik valid di dalam polygon. Coverage ${totalCoverage.toFixed(2)} Ha; ketuntasan ${completion.toFixed(1)}% dari HESTI.${bad.length?' File gagal: '+bad.join('; '):''}`;$('activityExportBtn').disabled=!activityRows.length;$('activityHtmlReportBtn').disabled=!activityRows.length;$('activityRunAI').disabled=!activityRows.length;$('activityAiTitle').textContent='AI Insight '+activityNames[activityCurrent];prismRenderAi('activityAi',activityRows.filter(p=>p.valid),activityNames[activityCurrent]);
  if(activityRows.length){const bounds=L.latLngBounds(activityRows.map(p=>[p.lat,p.lon]));if(bounds.isValid())map.fitBounds(bounds.pad(.12));}}
 function activityExport(){if(!activityRows.length)return;const cols=['zip','file','row','time','employee','lat','lon','speed','accuracy','sat','valid','block'];const csv=[cols.join(','),...activityRows.map(p=>cols.map(k=>'"'+String(p[k]??'').replace(/"/g,'""')+'"').join(','))].join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='SENARA_'+activityCurrent+'_GPS_AUDIT.csv';a.click();URL.revokeObjectURL(a.href);}
-function activityClear(){activityPlaybackStop();activityPlaybackEvents=[];activityPlaybackIndex=0;activityPlaybackLayer.clearLayers();['activityPlay','activityPause','activityRestart'].forEach(id=>$(id).disabled=true);$('activityRange').disabled=true;$('activityTime').textContent='Belum ada rekaman';$('activityPosition').textContent='0 / 0 titik';$('activityWorker').textContent='Pekerja: -';activityRows=[];activityStore[activityCurrent]=[];activityLayer.clearLayers();$('activityFiles').value='';['activityFileCount','activityTotal','activityValid','activityInside','activityOutside','activityBlocks','activityCoverageHa'].forEach(id=>$(id).textContent='0');$('activityCompletion').textContent='0.0%';$('activityBlockRows').innerHTML='<tr><td colspan="5">Menunggu upload ZIP</td></tr>';$('activityStatus').textContent='Data modul dibersihkan.';$('activityExportBtn').disabled=true;$('activityRunAI').disabled=true;$('activityAiSummary').textContent='Data modul dibersihkan.';$('activityAiFindings').innerHTML='';}
+function activityClear(){activityPlaybackStop();activityPlaybackEvents=[];activityPlaybackIndex=0;activityPlaybackLayer.clearLayers();['activityPlay','activityPause','activityRestart'].forEach(id=>$(id).disabled=true);$('activityRange').disabled=true;$('activityTime').textContent='Belum ada rekaman';$('activityPosition').textContent='0 / 0 titik';$('activityWorker').textContent='Pekerja: -';activityRows=[];activityStore[activityCurrent]=[];activityLayer.clearLayers();$('activityFiles').value='';['activityFileCount','activityTotal','activityValid','activityInside','activityOutside','activityBlocks','activityCoverageHa'].forEach(id=>$(id).textContent='0');$('activityCompletion').textContent='0.0%';$('activityBlockRows').innerHTML='<tr><td colspan="5">Menunggu upload ZIP</td></tr>';$('activityStatus').textContent='Data modul dibersihkan.';$('activityExportBtn').disabled=true;$('activityHtmlReportBtn').disabled=true;$('activityRunAI').disabled=true;$('activityAiSummary').textContent='Data modul dibersihkan.';$('activityAiFindings').innerHTML='';}
 $('activityFiles').addEventListener('change',()=>{$('activityProcessBtn').disabled=!$('activityFiles').files.length});
 $('activityRunAI').addEventListener('click',()=>prismRenderAi('activityAi',activityRows.filter(p=>p.valid),activityNames[activityCurrent]));
 $('manualRunAI').addEventListener('click',()=>{const pts=manualTracks.flatMap(t=>t.points.filter(p=>p.ts!==null).map(p=>({...p,worker:t.name,block:manualPointBlock(p),inside:manualPointBlock(p)!==null})));prismRenderAi('manualAi',pts,'PEMUPUKAN MANUAL');});
@@ -877,5 +963,5 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   });
 }
 
-bindOfflineControls('manual');bindOfflineControls('mechanized');initMap();setModuleMode('home');
+bindOfflineControls('manual');bindOfflineControls('mechanized');$('manualHtmlReport').addEventListener('click',()=>senaraExportHtmlReport('manual'));$('mechHtmlReport').addEventListener('click',()=>senaraExportHtmlReport('mechanized'));$('activityHtmlReportBtn').addEventListener('click',()=>senaraExportHtmlReport('activity'));initMap();setModuleMode('home');
 </script></body></html>
