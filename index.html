@@ -7,7 +7,7 @@
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/prism-192.png">
 <link rel="apple-touch-icon" href="./icons/prism-192.png">
-<title>SENARA | Integrated Field Operations & GPS Intelligence</title>
+<title>SENARA V6 · Universal GPS Engine | Integrated Field Operations & GPS Intelligence</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
@@ -301,7 +301,7 @@ function senaraExportHtmlReport(mode){
  if(!points.length){alert('Belum ada data GPS untuk dibuatkan laporan HTML.');return;}
  const payload={brand:'SENARA',title:moduleName,createdAt:new Date().toISOString(),summary,table,ai,points,tracks,polygons:GITA_POLYGONS};
  const json=senaraSafeJson(payload);
- const html=`<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SENARA Offline Report - ${moduleName}</title><style>
+ const html=`<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SENARA V6 · Universal GPS Engine Offline Report - ${moduleName}</title><style>
  :root{color-scheme:dark;--bg:#07110f;--panel:#10221b;--line:#2b4b3c;--txt:#e8f5ed;--muted:#9ab5a6;--green:#39d98a;--cyan:#54d6df}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0,#163d2d,#07110f 55%);color:var(--txt);font:14px system-ui,Arial,sans-serif;padding:18px}.wrap{max-width:1200px;margin:auto}header,.card{background:#10221bee;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}h1{margin:0;color:#b8f5d0;letter-spacing:3px}h2{font-size:14px;color:#b8f5d0;letter-spacing:1px}.muted,small{color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:9px}.stat{background:#0a1913;border:1px solid var(--line);padding:12px;border-radius:10px}.stat b{display:block;font-size:22px;color:#fff;margin-top:5px}#map{width:100%;height:min(68vh,680px);background:#0a1712;border:1px solid var(--line);border-radius:10px;touch-action:none;cursor:grab}.offline-map-tools{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:8px 0}.offline-map-tools button{min-width:40px}.offline-map-tools .muted{font-size:11px}button,select{background:#176d48;color:white;border:1px solid #42bd80;padding:9px 12px;border-radius:8px;font-weight:700}button.secondary{background:#172c22;border-color:#45624f}input[type=range]{width:100%;accent-color:var(--green)}.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}.controls select{background:#0b1913}table{border-collapse:collapse;width:100%;font-size:12px}td,th{padding:9px;border-bottom:1px solid #294236;text-align:left}th{color:#aee9c4}pre{white-space:pre-wrap;word-break:break-word;color:#d5e9dc;font:12px/1.6 system-ui} .legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:9px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}@media(max-width:600px){body{padding:9px}header,.card{padding:12px}#map{height:55vh}}
  </style></head><body><div class="wrap"><header><h1>SENARA</h1><b>INTEGRATED FIELD OPERATIONS & GPS INTELLIGENCE</b><p>${moduleName} · LAPORAN OFFLINE INTERAKTIF</p><small>Dibuat: ${new Date().toLocaleString('id-ID')} · Data tersimpan di dalam file ini</small></header>
  <section class="card"><h2>RINGKASAN HASIL</h2><div class="stats" id="stats"></div></section>
@@ -552,34 +552,58 @@ const manualPalette=['#16a34a','#0ea5e9','#f59e0b','#a855f7','#ef4444','#14b8a6'
 function manualNorm(s){return String(s||'').trim().toLowerCase().replace(/[^a-z0-9]/g,'')}
 function manualFind(headers,names){for(const n of names){const h=headers.find(x=>manualNorm(x)===manualNorm(n));if(h)return h}return null}
 function manualTime(v){if(v===undefined||v===null||v==='')return null;let n=Number(v);if(Number.isFinite(n)&&String(v).trim()!==''){if(n>1e12)return new Date(n);if(n>1e9)return new Date(n*1000)}const d=new Date(v);return Number.isNaN(d.getTime())?null:d}
-function manualParseCSV(text,name){
- return new Promise(resolve=>Papa.parse(text,{header:true,skipEmptyLines:true,dynamicTyping:true,complete:r=>{
-  const rows=r.data||[],headers=r.meta.fields||[];
-  const latK=manualFind(headers,['lat','latitude']),lonK=manualFind(headers,['lon','lng','longitude']);
-  const timeK=manualFind(headers,['time','timestamp','datetime','date_time','recorded_at']);
-  const speedK=manualFind(headers,['speed_kmh','speedkmh','speed_mps','speed_ms','speed','velocity']);
-  const accK=manualFind(headers,['accuracy','horizontal_accuracy','hdop']);
-  const satK=manualFind(headers,['satellites','satellite','sat','sat_count']),npkK=manualFind(headers,['npk','empno','emp_no','employee_id','employeeid','id_karyawan']);
-  if(!latK||!lonK){resolve({ok:false,name,reason:'Kolom latitude/longitude tidak ditemukan'});return}
-  const speedHeader=manualNorm(speedK||'');
-  const speedIsMps=speedHeader==='speed'||speedHeader.includes('mps')||speedHeader.includes('ms');
-  const filenameNpk=(String(name).match(/(?:^|[^0-9])(\\d{5,})(?:[^0-9]|$)/)||[])[1]||'';
-  const points=rows.map((r,i)=>{
-   const lat=Number(r[latK]),lon=Number(r[lonK]);
-   if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)return null;
-   let speed=speedK===null?null:Number(r[speedK]);
-   if(Number.isFinite(speed)&&speed>=0){if(speedIsMps)speed*=3.6;}else speed=null;
-   const d=manualTime(timeK?r[timeK]:null);
-   const accuracy=accK?Number(r[accK]):null,sat=satK?Number(r[satK]):null;
-   const complete=Number.isFinite(speed)&&Number.isFinite(accuracy)&&Number.isFinite(sat);
-   const valid=complete&&speed<=5&&accuracy<5&&sat>=4;
-   const npk=npkK?String(r[npkK]??'').trim():filenameNpk;
-   return {lat,lon,time:d?d.toISOString():null,ts:d?d.getTime():null,speed,accuracy,sat,complete,valid,worker:name,employee:npk,employeeName:prismHrisName(npk),npk,idx:i+1};
-  }).filter(Boolean);
-  if(!points.length){resolve({ok:false,name,reason:'Tidak ada koordinat GPS valid'});return}
-  resolve({ok:true,name,points});
- }}));
+// SENARA V6 · Universal GPS Engine: one normalization contract for all manual jobs.
+const SENARA_GPS_ENGINE_VERSION='6.0';
+function senaraHeaderKey(v){return String(v??'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
+function senaraFindHeader(headers,aliases){const keys=new Set(aliases.map(senaraHeaderKey));return headers.find(h=>keys.has(senaraHeaderKey(h)))||null;}
+function senaraNumber(v){if(v===undefined||v===null||String(v).trim()==='')return null;let x=String(v).trim().replace(/\s/g,'');if(x.includes(',')&&!x.includes('.'))x=x.replace(',','.');else x=x.replace(/,/g,'');const n=Number(x);return Number.isFinite(n)?n:null;}
+function senaraParseTimestamp(row,headers){
+ const tsK=senaraFindHeader(headers,['time','timestamp','datetime','date_time','recorded_at','recordedat','gps_time','gpstime','utc_time','utctime','created_at','createdat']);
+ const dateK=senaraFindHeader(headers,['date','tanggal','record_date']);const clockK=senaraFindHeader(headers,['clock','jam','time_of_day']);
+ let value=tsK?row[tsK]:null;if((value===null||String(value).trim()==='')&&dateK){value=String(row[dateK]||'').trim()+(clockK?' '+String(row[clockK]||'').trim():'');}
+ if(value===null||String(value).trim()==='')return null;
+ const raw=String(value).trim(),n=Number(raw);if(Number.isFinite(n)&&raw!==''){if(n>1e12)return n;if(n>1e9)return n*1000;if(n>1e6)return n*1000;}
+ // ISO timestamps retain their explicit timezone; date-only/local values are parsed by browser locale.
+ const d=new Date(raw);return Number.isFinite(d.getTime())?d.getTime():null;
 }
+function senaraSpeedToKmh(value,header){
+ if(value===null)return null;const k=senaraHeaderKey(header);
+ if(/kmh|kmph|kph|kilometerperhour|kilometresperhour/.test(k))return value;
+ if(/mps|ms1|meterpersecond|metrespersecond|velocity/.test(k))return value*3.6;
+ // Android GPS Logger exports the plain `speed` field in metres/second.
+ if(k==='speed'||k==='gpsspeed')return value*3.6;
+ return value;
+}
+function senaraFilenameIdentity(name){const base=String(name||'').split('/').pop();const m=base.match(/(?:^|[^0-9])(\d{5,})(?:[^0-9]|$)/);return m?m[1]:'';}
+function senaraNormalizeGpsRows(rows,headers,name,sourceZip){
+ const latK=senaraFindHeader(headers,['lat','latitude','gps_lat','gpslatitude','y']);
+ const lonK=senaraFindHeader(headers,['lon','lng','longitude','gps_lon','gpslongitude','x']);
+ const speedK=senaraFindHeader(headers,['speed_kmh','speedkmh','speed_kph','speed_mps','speed_ms','speed','gps_speed','velocity']);
+ const accK=senaraFindHeader(headers,['accuracy','horizontal_accuracy','horizontalaccuracy','gps_accuracy','accuracy_m','acc']);
+ const satK=senaraFindHeader(headers,['satellites','satellite','sat','sat_count','satellites_count','numsatellites','gps_satellites']);
+ const idK=senaraFindHeader(headers,['npk','empno','emp_no','employee_id','employeeid','id_karyawan','employee_code','worker_id','userid']);
+ const nameK=senaraFindHeader(headers,['employee_name','employeename','nama','nama_karyawan','worker_name','name']);
+ const filenameId=senaraFilenameIdentity(name);
+ if(!latK||!lonK)return {ok:false,name,reason:'Kolom latitude/longitude tidak ditemukan',diagnostics:{headers}};
+ const points=[];let invalidCoordinate=0,invalidTimestamp=0;
+ (rows||[]).forEach((row,i)=>{
+  const lat=senaraNumber(row[latK]),lon=senaraNumber(row[lonK]);
+  if(lat===null||lon===null||Math.abs(lat)>90||Math.abs(lon)>180){invalidCoordinate++;return;}
+  const ts=senaraParseTimestamp(row,headers);if(ts===null)invalidTimestamp++;
+  const rawSpeed=senaraNumber(speedK?row[speedK]:null),speed=senaraSpeedToKmh(rawSpeed,speedK||'');
+  const accuracy=senaraNumber(accK?row[accK]:null),sat=senaraNumber(satK?row[satK]:null);
+  const employee=String(idK?row[idK]??'':filenameId).trim().replace(/\.0$/,'');
+  const employeeName=String(nameK?row[nameK]??'':'').trim()||prismHrisName(employee);
+  const complete=speed!==null&&accuracy!==null&&sat!==null;
+  const valid=complete&&speed>=0&&speed<=5&&accuracy>=0&&accuracy<5&&sat>=4;
+  points.push({lat,lon,time:ts===null?String(row[senaraFindHeader(headers,['time','timestamp','datetime','date_time','recorded_at'])]||''):new Date(ts).toISOString(),ts,speed,accuracy,sat,complete,valid,employee,employeeName,npk:employee,file:String(name||''),worker:String(name||''),zip:String(sourceZip||''),row:i+1,block:null,inside:false});
+ });
+ return {ok:points.length>0,name,points,reason:points.length?'':'Tidak ada koordinat GPS valid',diagnostics:{rows:(rows||[]).length,invalidCoordinate,invalidTimestamp,missingColumns:{speed:!speedK,accuracy:!accK,satellites:!satK,time:!senaraFindHeader(headers,['time','timestamp','datetime','date_time','recorded_at'])},speedSource:speedK||'tidak tersedia',speedUnit:/kmh|kmph|kph/.test(senaraHeaderKey(speedK||''))?'km/jam':'m/s (normalisasi ×3,6 untuk kolom speed standar)'}};
+}
+function senaraParseGpsCsv(text,name,sourceZip=''){
+ return new Promise(resolve=>Papa.parse(text,{header:true,skipEmptyLines:true,dynamicTyping:false,complete:r=>resolve(senaraNormalizeGpsRows(r.data||[],r.meta.fields||[],name,sourceZip)),error:e=>resolve({ok:false,name,reason:e.message||'CSV gagal dibaca'})}));
+}
+function manualParseCSV(text,name){return senaraParseGpsCsv(text,name,'');}
 
 async function prismReadZipCsv(file){
  const buf=await file.arrayBuffer(),view=new DataView(buf),bytes=new Uint8Array(buf);
@@ -627,7 +651,7 @@ async function processManualZip(){
   $('manualRange').max=Math.max(0,manualEvents.length-1);$('manualRange').value=0;
   ['manualPlay','manualPause','manualRestart'].forEach(id=>$(id).disabled=!manualEvents.length);$('manualRange').disabled=!manualEvents.length;
   const failed=results.filter(x=>!x.ok);
-  const manualTotal=manualTracks.reduce((n,t)=>n+t.points.length,0),manualValid=manualTracks.reduce((n,t)=>n+t.points.filter(p=>p.valid).length,0);$('manualStatus').textContent=`ZIP: ${file.name}\nCSV ditemukan: ${entries.length}\nBerhasil: ${manualTracks.length}\nGagal: ${failed.length}\nTitik GPS: ${fmt(manualTotal)}\nLolos filter manual: ${fmt(manualValid)}\nStandar: kecepatan ≤5 km/jam · akurasi <5 m · satelit ≥4\n\n`+results.map(x=>`${x.ok?'✓':'✕'} ${x.name}: ${x.ok?x.points.length+' titik ('+x.points.filter(p=>p.valid).length+' lolos GPS)':x.reason}`).join('\n');
+  const manualTotal=manualTracks.reduce((n,t)=>n+t.points.length,0),manualValid=manualTracks.reduce((n,t)=>n+t.points.filter(p=>p.valid).length,0);$('manualStatus').textContent=`ZIP: ${file.name}\nCSV ditemukan: ${entries.length}\nBerhasil: ${manualTracks.length}\nGagal: ${failed.length}\nTitik GPS: ${fmt(manualTotal)}\nLolos filter manual: ${fmt(manualValid)}\nSENARA Universal GPS Engine v${SENARA_GPS_ENGINE_VERSION}. Standar: kecepatan ≤5 km/jam · akurasi <5 m · satelit ≥4\n\n`+results.map(x=>`${x.ok?'✓':'✕'} ${x.name}: ${x.ok?x.points.length+' titik ('+x.points.filter(p=>p.valid).length+' lolos GPS)':x.reason}`).join('\n');
   $('manualClassification').textContent=`${manualTracks.length} pemupuk · ${manualEvents.length} event bertimestamp`;
   if(manualEvents.length){manualDrawBase();manualCoverageByBlock();manualSetIndex(0);}
  }catch(e){$('manualStatus').textContent='GAGAL MEMBACA ZIP: '+(e&&e.message?e.message:String(e));}
@@ -640,9 +664,10 @@ function manualPointBlock(p){
 }
 function buildWorkerCoverageSegments(records, workerKey, colorFn){
  const grouped=new Map();
- for(const p of records){if(!p.valid||!Number.isFinite(p.ts)||!p.block)continue;const k=String(p[workerKey]||p.worker||p.file||'PEKERJA');if(!grouped.has(k))grouped.set(k,[]);grouped.get(k).push(p);}
+ for(const p of records){if(!p.valid||!Number.isFinite(p.ts)||!p.block)continue;const day=Number.isFinite(p.ts)?new Date(p.ts).toISOString().slice(0,10):'no-date';const identity=String(p[workerKey]||p.employee||p.worker||p.file||'PEKERJA');const k=[String(p.zip||''),String(p.file||p.worker||'PEKERJA'),identity,day].join('|');if(!grouped.has(k))grouped.set(k,{worker:identity,points:[]});grouped.get(k).points.push(p);}
  const features=[];
- for(const [worker,pts] of grouped){
+ for(const group of grouped.values()){
+  const worker=group.worker,pts=group.points;
   pts.sort((a,b)=>a.ts-b.ts);let run=[],block=null,last=null;
   const flush=()=>{if(!run.length)return;try{
    const line=run.length===1?turf.point([run[0].lon,run[0].lat]):turf.lineString(run.map(p=>[p.lon,p.lat]));
@@ -901,14 +926,11 @@ async function activityProcess(){
   }catch(e){bad.push(zipFile.name+' (ZIP tidak valid atau gagal dibuka)');}
  }
  if(!csvFiles.length){activityRender(0,bad);return;}
- for(const item of csvFiles){await new Promise(resolve=>{Papa.parse(item.text,{header:true,skipEmptyLines:true,dynamicTyping:false,complete:r=>{
-  const headers=r.meta.fields||[],latK=findCol(headers,['lat','latitude']),lonK=findCol(headers,['lon','lng','longitude']),timeK=findCol(headers,['time','timestamp','datetime','date_time','recorded_at']),speedK=findCol(headers,['speed','velocity','speed_mps','speed_ms','speed_kmh']),accK=findCol(headers,['accuracy','horizontal_accuracy','hdop']),satK=findCol(headers,['satellites','satellite','sat','sat_count']),idK=findCol(headers,['npk','empno','emp_no','employee_id','employeeid','id_karyawan']),nameK=findCol(headers,['employee_name','employeename','nama','nama_karyawan','worker_name','name']);
-  if(!latK||!lonK){bad.push(item.name+' (kolom lat/lon tidak ditemukan)');resolve();return;}
-  (r.data||[]).forEach((row,i)=>{const lat=activityParseNumber(row[latK]),lon=activityParseNumber(row[lonK]);if(lat===null||lon===null||Math.abs(lat)>90||Math.abs(lon)>180)return;
-   let speed=activityParseNumber(speedK?row[speedK]:null);if(speed!==null&&/mps|speed_ms|velocity/i.test(speedK||''))speed*=3.6;else if(speed!==null&&speed<=40&&/speed/i.test(speedK||''))speed*=3.6;
-   const accuracy=activityParseNumber(accK?row[accK]:null),sat=activityParseNumber(satK?row[satK]:null),complete=speed!==null&&accuracy!==null&&sat!==null,valid=complete&&speed<=5&&accuracy<5&&sat>=4;
-   const p={lat,lon,time:timeK?row[timeK]:'',ts:activityPlaybackTime(timeK?row[timeK]:null),speed,accuracy,sat,employee:idK?String(row[idK]||'').trim():'',employeeName:prismHrisName(idK?row[idK]:''),file:item.name,zip:item.sourceZip,valid,complete,block:null,row:i+1};p.block=activityPointBlock(p);p.inside=!!p.block;activityRows.push(p);
-  });resolve();},error:e=>{bad.push(item.name+' ('+e.message+')');resolve();}});});}
+ for(const item of csvFiles){
+  const parsed=await senaraParseGpsCsv(item.text,item.name,item.sourceZip);
+  if(!parsed.ok){bad.push(item.name+' ('+(parsed.reason||'CSV tidak valid')+')');continue;}
+  parsed.points.forEach(p=>{p.block=activityPointBlock(p);p.inside=!!p.block;activityRows.push(p);});
+ }
  activityPlaybackLoad(activityRows);
  activityRender(csvFiles.length,bad);
 }
@@ -917,7 +939,7 @@ function activityBuildCoverageByBlock(validPoints){
  GITA_POLYGONS.features.forEach(f=>{out[blockName(f)]={feature:f,points:0,coverage:0,hesti:hestiHa(f),geometry:null};});
  // Jalur diproses per pekerja/file agar lintasan antarpekerja tidak tersambung.
  const workers=new Map();
- validPoints.forEach(p=>{if(!p.block)return;const key=`${p.zip||''}|${p.file||''}|${p.employee||''}`;if(!workers.has(key))workers.set(key,[]);workers.get(key).push(p);out[p.block].points++;});
+ validPoints.forEach(p=>{if(!p.block)return;const day=Number.isFinite(p.ts)?new Date(p.ts).toISOString().slice(0,10):'no-date';const key=`${p.zip||''}|${p.file||''}|${p.employee||''}|${day}`;if(!workers.has(key))workers.set(key,[]);workers.get(key).push(p);out[p.block].points++;});
  for(const [key,events] of workers){
   events.sort((a,b)=>{const ta=a.ts??NaN,tb=b.ts??NaN;return Number.isFinite(ta)&&Number.isFinite(tb)?ta-tb:(a.row||0)-(b.row||0)});
   let currentBlock=null,run=[],last=null;
@@ -972,7 +994,7 @@ function activityRender(fileCount,bad){activityStore[activityCurrent]=activityRo
  const totalCoverage=rows.reduce((sum,[b,v])=>sum+v.coverage,0),totalHesti=rows.reduce((sum,[b,v])=>sum+(v.hesti||0),0),completion=totalHesti?totalCoverage/totalHesti*100:0;
  $('activityFileCount').textContent=fileCount-bad.length;$('activityTotal').textContent=fmt(activityRows.length);$('activityValid').textContent=fmt(valid.length);$('activityInside').textContent=fmt(inside.length);$('activityOutside').textContent=fmt(outside);$('activityBlocks').textContent=rows.length;$('activityCoverageHa').textContent=totalCoverage.toFixed(2);$('activityCompletion').textContent=completion.toFixed(1)+'%';
  $('activityBlockRows').innerHTML=rows.map(([b,v])=>`<tr><td>${b}</td><td>${fmt(v.points)}</td><td>${v.coverage.toFixed(2)}</td><td>${v.hesti===null?'-':v.hesti.toFixed(2)}</td><td>${v.hesti===null?'-':(v.coverage/v.hesti*100).toFixed(1)+'%'}</td></tr>`).join('')||'<tr><td colspan="5">Tidak ada titik GPS valid di dalam polygon</td></tr>';
- $('activityStatus').textContent=`${activityNames[activityCurrent]}: ${fmt(activityRows.length)} titik dari ${fileCount-bad.length} file. ${fmt(valid.length)} lolos filter (≤5 km/jam, <5 m, ≥4 satelit); ${fmt(inside.length)} titik valid di dalam polygon. Coverage ${totalCoverage.toFixed(2)} Ha; ketuntasan ${completion.toFixed(1)}% dari HESTI.${bad.length?' File gagal: '+bad.join('; '):''}`;$('activityExportBtn').disabled=!activityRows.length;$('activityHtmlReportBtn').disabled=!activityRows.length;$('activityRunAI').disabled=!activityRows.length;$('activityAiTitle').textContent='AI Insight '+activityNames[activityCurrent];prismRenderAi('activityAi',activityRows.filter(p=>p.valid),activityNames[activityCurrent]);
+ $('activityStatus').textContent=`SENARA Universal GPS Engine v${SENARA_GPS_ENGINE_VERSION} · ${activityNames[activityCurrent]}: ${fmt(activityRows.length)} titik dari ${fileCount-bad.length} file. ${fmt(valid.length)} lolos filter (≤5 km/jam, <5 m, ≥4 satelit); ${fmt(inside.length)} titik valid di dalam polygon. Coverage ${totalCoverage.toFixed(2)} Ha; ketuntasan ${completion.toFixed(1)}% dari HESTI.${bad.length?' File gagal: '+bad.join('; '):''}`;$('activityExportBtn').disabled=!activityRows.length;$('activityHtmlReportBtn').disabled=!activityRows.length;$('activityRunAI').disabled=!activityRows.length;$('activityAiTitle').textContent='AI Insight '+activityNames[activityCurrent];prismRenderAi('activityAi',activityRows.filter(p=>p.valid),activityNames[activityCurrent]);
  if(activityRows.length){const bounds=L.latLngBounds(activityRows.map(p=>[p.lat,p.lon]));if(bounds.isValid())map.fitBounds(bounds.pad(.12));}}
 function activityExport(){if(!activityRows.length)return;const cols=['zip','file','row','time','employee','lat','lon','speed','accuracy','sat','valid','block'];const csv=[cols.join(','),...activityRows.map(p=>cols.map(k=>'"'+String(p[k]??'').replace(/"/g,'""')+'"').join(','))].join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='SENARA_'+activityCurrent+'_GPS_AUDIT.csv';a.click();URL.revokeObjectURL(a.href);}
 function activityClear(){activityPlaybackStop();activityPlaybackEvents=[];activityPlaybackIndex=0;activityPlaybackLayer.clearLayers();activityCoverageLayer.clearLayers();activityCoverageFeatures=[];['activityPlay','activityPause','activityRestart'].forEach(id=>$(id).disabled=true);$('activityRange').disabled=true;$('activityTime').textContent='Belum ada rekaman';$('activityPosition').textContent='0 / 0 titik';$('activityWorker').textContent='Pekerja: -';activityRows=[];activityStore[activityCurrent]=[];activityLayer.clearLayers();$('activityFiles').value='';['activityFileCount','activityTotal','activityValid','activityInside','activityOutside','activityBlocks','activityCoverageHa'].forEach(id=>$(id).textContent='0');$('activityCompletion').textContent='0.0%';$('activityBlockRows').innerHTML='<tr><td colspan="5">Menunggu upload ZIP</td></tr>';$('activityStatus').textContent='Data modul dibersihkan.';$('activityExportBtn').disabled=true;$('activityHtmlReportBtn').disabled=true;$('activityRunAI').disabled=true;$('activityAiSummary').textContent='Data modul dibersihkan.';$('activityAiFindings').innerHTML='';}
